@@ -14,5 +14,5 @@ class Hedge:
             logging.error('USER environment variable is not define, cannot continue')
             return
         user = os.environ['USER']
-        agent.ensurePackages['neovim']
+        agent.ensurePackages(['neovim'])
         agent.ensureFile('/vim/.vimrc', f"/home/{user}/.vimrc")
