@@ -1,17 +1,19 @@
 import argparse
 import logging
 import sys
+import inspect
 
-def padSessionTarget():
+def podSessionTarget():
+    pass
+
+def deploymentApplyTarget():
     pass
 
 
-def listTargets(self, hedge_obj):
-    methods = {}
-    for name, func in inspect.getmembers(hedge_obj.__class__, inspect.isfunction):
-        if not name.startswith("_") and name.endswith('Target'):
-                methods[name]= {'parameters' :params}
-    return methods
+def listTargets(current_module):
+    functions = inspect.getmembers(current_module, inspect.isfunction)
+    target_functions = [name for name, func in functions if name.endswith("Target")]
+    return target_functions
 
 def main():   
     parser = argparse.ArgumentParser(prog="k8s helper",
