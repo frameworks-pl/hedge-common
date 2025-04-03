@@ -2,22 +2,45 @@ import argparse
 import logging
 import sys
 import inspect
+import subprocess
 
 
 args = None
 
-def getPods(name = None)
-    pass
+def getPods(name = None):
+    cmd = ["sudo", "kubectl", "get", "pods"]
+
+    try:
+        result = subprocess.run(cmd, capture_output=True, text=True, check=True)
+        resultArray = result.stdout.splitlines()
+        return resultArray
+    except subprocess.CalledProcessError as e:
+        print("Error:\n", e.stderr)
+        exit(1)
 
 def podSessionTarget():
+    global args
     if not args.name:
         print("Name of the pod is missing")
         return False
 
-    global args
     pods = getPods(args.name)
+    available_pods = []
+    for line in pods:
+        
+        pod_name = line.split(maxsplit=1)[0]
+        available_pods.append(pod_name)
 
-    print(args.name)
+        if line.startswith(args.name):
+            cmd = ["sudo", "kubectl", "exec", "-it", pod_name, "--", "/bin/bash"]
+            result = subprocess.run(cmd)
+            return True
+
+
+    #if we are here it's because we did not find pod to run, show which available pads to user
+    print(f"I did not find pod {args.name}, available pods:")
+    for pod in available_pods:
+        print(pod)
 
 def deploymentApplyTarget():
     print("deploymentApplyTarget")
@@ -72,7 +95,7 @@ def main():
         logging.error(f"There is no such target: '{args.target}'")
         return 1;
 
-    target_func()
+    return target_func()
 
 
 if __name__ == '__main__':
