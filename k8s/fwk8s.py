@@ -3,8 +3,21 @@ import logging
 import sys
 import inspect
 
+
+args = None
+
+def getPods(name = None)
+    pass
+
 def podSessionTarget():
-    print("podSessionTarget")
+    if not args.name:
+        print("Name of the pod is missing")
+        return False
+
+    global args
+    pods = getPods(args.name)
+
+    print(args.name)
 
 def deploymentApplyTarget():
     print("deploymentApplyTarget")
@@ -19,7 +32,7 @@ def main():
     parser = argparse.ArgumentParser(prog="k8s helper",
         description='Script to speed up operations on k8s')
     #parser.add_argument('-it', "--interactive", type=str, help='Enter interactive session of a pod')
-    # parser.add_argument('-m', "--module", type=str, help='Execute target from the provided module rather than from default one (hedge)', default='hedge')
+    parser.add_argument('-n', "--name", type=str, help='Name of a thing to be used in given target (pod, deployment, etc)', default=None)
     # parser.add_argument('-p', "--port", type=str, help='Port of the repository with server configuration', default=None)
     # parser.add_argument('-w', "--workdir", type=str, help='Location of work directory', default=None)
     parser.add_argument('-t', "--target", type=str, help='Target to execute')
@@ -28,6 +41,7 @@ def main():
     # parser.add_argument('-v', "--verbose", type=bool, help='Verbose mode', default=False)
     # parser.add_argument('-o', "--sshoptions", type=str, help='SSH options', default="")
     
+    global args
     args = parser.parse_args()
     current_module = sys.modules[__name__]
 
