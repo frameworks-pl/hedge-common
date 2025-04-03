@@ -4,15 +4,15 @@ import sys
 import inspect
 
 def podSessionTarget():
-    pass
+    print("podSessionTarget")
 
 def deploymentApplyTarget():
-    pass
+    print("deploymentApplyTarget")
 
 
 def listTargets(current_module):
     functions = inspect.getmembers(current_module, inspect.isfunction)
-    target_functions = [name for name, func in functions if name.endswith("Target")]
+    target_functions = [name[:-6] for name, func in functions if name.endswith("Target")]
     return target_functions
 
 def main():   
@@ -47,17 +47,18 @@ def main():
         logging.error("Missing target")
         return 1
 
+    #append "Target" to target
+    target = args.target + "Target"
+
     target_func = None
-    if hasattr(current_module, args.target):
-        target_func = getattr(current_module, args.target)
+    if hasattr(current_module, target):
+        target_func = getattr(current_module, target)
 
     if not target_func:
         logging.error(f"There is no such target: '{args.target}'")
         return 1;
 
-
-
-
+    target_func()
 
 
 if __name__ == '__main__':
