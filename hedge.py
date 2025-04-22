@@ -20,5 +20,5 @@ class Hedge:
         agent.ensureFile('/vim/.vimrc', f"{home}/.vimrc")
 
     def k8s_helper(self, agent, params):
-        agent.ensureFile('/root/scripts/fwk8s.py')
+        agent.ensureFile('/root/scripts/fwk8s.py', f"{home}/scripts/fwk82.py")
         
