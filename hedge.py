@@ -24,5 +24,5 @@ class Hedge:
             logging.error('HOME environment variable is not define, cannot continue')
             return
         home = os.environ['HOME']    
-        agent.ensureFile('/root/scripts/fwk8s.py', f"{home}/scripts/fwk8s.py")
+        agent.ensureFile('/k8s/fwk8s.py', f"{home}/scripts/fwk8s.py")
         
