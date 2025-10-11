@@ -26,3 +26,5 @@ class Hedge:
         home = os.environ['HOME']    
         agent.ensureFile('/k8s/fwk8s.py', f"{home}/scripts/fwk8s.py")
         
+    def lazyvim(self, agent, params):
+        pass
