@@ -6,7 +6,7 @@ class Hedge:
         self.repoRootPath = repoRootPath
 
     def preflight(self, agent, params):
-        agent.runCommand('add-apt-repository ppa:neovim-ppa/stable')
+        agent.runCommand('add-apt-repository -y ppa:neovim-ppa/stable')
         agent.runCommand('apt-get update')
 
     def vim(self, agent, params):
