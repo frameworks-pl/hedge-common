@@ -40,7 +40,7 @@ class Hedge:
 
     def lazyvim(self, agent, params):
         #just to make a backup
-        agent.encureDirectory("~/.config/nvim") 
+        agent.ensureDirectory("~/.config/nvim") 
 
         #remove dir, as git expect it to not be there
         agent.runCommand("rm -rf ~/.config/nvim")
