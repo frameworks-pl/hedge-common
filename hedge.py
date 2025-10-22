@@ -39,14 +39,16 @@ class Hedge:
 
 
     def lazyvim(self, agent, params):
+        home = os.environ['HOME']
+
         #just to make a backup
-        agent.ensureDir("~/.config/nvim") 
+        agent.ensureDir(f"{home}/.config/nvim") 
 
         #remove dir, as git expect it to not be there
-        agent.runCommand("rm -rf ~/.config/nvim")
+        agent.runCommand(f"rm -rf {home}/.config/nvim")
 
-        agent.runCommand("git clone https://github.com/LazyVim/starter ~/.config/nvim")
-        agent.runCommand("rm -rf ~/.config/nvim/.git")
+        agent.runCommand(f"git clone https://github.com/LazyVim/starter {home}/.config/nvim")
+        agent.runCommand(f"rm -rf {home}/.config/nvim/.git")
 
     def k8s_helper(self, agent, params):
         if not os.environ['HOME']:
