@@ -30,7 +30,7 @@ class Hedge:
         agent.runCommand(f"mv {tmp}/nvim-linux-x86_64 /opt/nvim")
 
         #backup existing nvim, if there is one
-        agent.runCommand("[ ! -e /usr/bin/nvim.old ] && sudo mv /usr/bin/nvim /usr/bin/nvim.old")
+        agent.runCommand("[ ! -e /usr/bin/nvim.old ] && sudo mv /usr/bin/nvim /usr/bin/nvim.old || :")
         agent.runCommand("rm -rf /usr/bin/nvim")
         agent.runCommand('ln -s /opt/nvim/bin/nvim', '/usr/bin/nvim')
 
