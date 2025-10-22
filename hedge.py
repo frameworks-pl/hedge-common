@@ -33,11 +33,20 @@ class Hedge:
         #backup existing nvim, if there is one
         agent.runCommand("[ ! -e /usr/bin/nvim.old ] && sudo mv /usr/bin/nvim /usr/bin/nvim.old || :")
         agent.runCommand("rm -rf /usr/bin/nvim")
+
+        #link nvim downloaded ot /usr/bin/vim
         agent.runCommand('ln -s /opt/nvim/bin/nvim /usr/bin/nvim')
 
 
     def lazyvim(self, agent, params):
-        pass        
+        #just to make a backup
+        agent.encureDirectory("~/.config/nvim") 
+
+        #remove dir, as git expect it to not be there
+        agent.runCommand("rm -rf ~/.config/nvim")
+
+        agent.runCommand("git clone https://github.com/LazyVim/starter ~/.config/nvim")
+        agent.runCommand("rm -rf ~/.config/nvim/.git")
 
     def k8s_helper(self, agent, params):
         if not os.environ['HOME']:
