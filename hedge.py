@@ -26,7 +26,13 @@ class Hedge:
     def nvim(self, agent, params):
         tmp = agent.getTempPath()
         agent.runCommand(f"wget https://github.com/neovim/neovim/releases/download/v0.11.4/nvim-linux-x86_64.tar.gz -O {tmp}/nvim-linux-x86_64.tar.gz")
-        agent.runCommand(f"tar xzvf {tmp}/nvim-linux-x86_64.tar.gz -C /opt/nvim/bin/nvim")
+        agent.runCommand(f"tar xzvf {tmp}/nvim-linux-x86_64.tar.gz -C {tmp}")
+        agent.runCommand(f"mv {tmp}/nvim-linux-x86_64 /opt/nvim")
+
+        #backup existing nvim, if there is one
+        agent.runCommand("[ ! -e /usr/bin/nvim.old ] && sudo mv /usr/bin/nvim /usr/bin/nvim.old")
+        agent.runCommand("rm -rf /usr/bin/nvim")
+        agent.ensureSymlink(f'/opt/nvim/bin/nvim', '/usr/bin/nvim')
 
     def lazyvim(self, agent, params):
         pass        
