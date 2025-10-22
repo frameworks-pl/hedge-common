@@ -26,8 +26,7 @@ class Hedge:
     def nvim(self, agent, params):
         tmp = agent.getTempPath()
         agent.runCommand(f"wget https://github.com/neovim/neovim/releases/download/v0.11.4/nvim-linux-x86_64.tar.gz -o {tmp}/nvim-linux-x86_64.tar.gz")
-        logging.info(f"Extracted to {tmp}/nvim-linux-x86_64.tar.gz")
-
+        agent.runCommand(f"cd {tmp} && tar xzvf nvim-linux-x86_64.tar.gz")
 
     def lazyvim(self, agent, params):
         pass        
