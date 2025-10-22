@@ -32,7 +32,8 @@ class Hedge:
         #backup existing nvim, if there is one
         agent.runCommand("[ ! -e /usr/bin/nvim.old ] && sudo mv /usr/bin/nvim /usr/bin/nvim.old")
         agent.runCommand("rm -rf /usr/bin/nvim")
-        agent.ensureSymlink(f'/opt/nvim/bin/nvim', '/usr/bin/nvim')
+        agent.runCommand('ln -s /opt/nvim/bin/nvim', '/usr/bin/nvim')
+
 
     def lazyvim(self, agent, params):
         pass        
