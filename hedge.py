@@ -50,6 +50,8 @@ class Hedge:
         agent.runCommand(f"git clone https://github.com/LazyVim/starter {home}/.config/nvim")
         agent.runCommand(f"rm -rf {home}/.config/nvim/.git")
 
+        agent.ensureFile(f"lazyvim/plugins/core.lua", "{home}/.config/nvim/plugins/core.lua")
+
     def k8s_helper(self, agent, params):
         if not os.environ['HOME']:
             logging.error('HOME environment variable is not define, cannot continue')
