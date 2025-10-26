@@ -1,5 +1,6 @@
 import logging
 import os
+import getpads
 
 class Hedge:
     def __init__(self, repoRootPath):
@@ -49,6 +50,8 @@ class Hedge:
 
         agent.runCommand(f"git clone https://github.com/LazyVim/starter {home}/.config/nvim")
         agent.runCommand(f"rm -rf {home}/.config/nvim/.git")
+        user = getpass.getuser()
+        agent.runCommand(f"chown -R {user}:{user} {home}/.config/nvim")
 
         agent.ensureFile("/lazyvim/plugins/core.lua", f"{home}/.config/nvim/plugins/core.lua")
 
