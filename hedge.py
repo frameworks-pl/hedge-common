@@ -53,7 +53,7 @@ class Hedge:
         user = getpass.getuser()
         agent.runCommand(f"chown -R {user}:{user} {home}/.config/nvim")
 
-        agent.ensureFile("/lazyvim/plugins/core.lua", f"{home}/.config/nvim/plugins/core.lua")
+        agent.ensureFile("/lazyvim/plugins/core.lua", f"{home}/.config/nvim/lua/plugins/core.lua")
 
     def k8s_helper(self, agent, params):
         if not os.environ['HOME']:
