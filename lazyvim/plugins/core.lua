@@ -1,8 +1,9 @@
 return {
   {
     "LazyVim/LazyVim",
-    opts = {
-      colorscheme = "desert",
-    }
+    opts = {},
+    config = function()
+      vim.cmd.colorscheme = ("desert")
+    end,
   }
 }
